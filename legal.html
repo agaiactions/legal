@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agai Actions · 07 · Legal & Structure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #1c1917;
+  --bg-nav:    #232120;
+  --bg-card:   #262320;
+  --bg-card2:  #2d2a27;
+  --bg-inset:  #1a1816;
+  --gold:      #c9a96e;
+  --gold-lt:   #dfc08a;
+  --gold-pale: #eedcb8;
+  --gold-glow: rgba(201,169,110,0.10);
+  --gold-line: rgba(201,169,110,0.22);
+  --text:      #f0e8da;
+  --text-2:    #cdc0a8;
+  --text-3:    #8a7d6e;
+  --text-4:    #4a443c;
+  --div:       rgba(255,255,255,0.06);
+  --r:         3px;
+}
+
+html { scroll-behavior: smooth; }
+body { background:var(--bg); color:var(--text); font-family:'Montserrat',sans-serif; font-weight:300; font-size:13px; line-height:1.75; -webkit-font-smoothing:antialiased; min-height:100vh; }
+
+/* HEADER */
+.hdr { display:flex; align-items:center; justify-content:space-between; padding:15px 32px; border-bottom:1px solid var(--div); position:sticky; top:0; z-index:300; background:var(--bg); }
+.hdr-logo { font-size:10.5px; letter-spacing:.2em; color:var(--text-3); text-transform:uppercase; line-height:1.5; }
+.hdr-badge { font-size:10px; letter-spacing:.18em; color:var(--gold); text-transform:uppercase; border:1px solid var(--gold-line); padding:5px 14px; border-radius:var(--r); white-space:nowrap; }
+
+/* TABS */
+.nav-wrap { position:sticky; top:57px; z-index:200; background:var(--bg-nav); border-bottom:1px solid var(--div); overflow-x:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; }
+.nav-wrap::-webkit-scrollbar { display:none; }
+.nav { display:flex; padding:0 24px; min-width:max-content; }
+.tab { background:none; border:none; font-family:'Montserrat',sans-serif; font-size:10px; font-weight:500; letter-spacing:.2em; text-transform:uppercase; color:var(--text-3); padding:16px 20px; cursor:pointer; white-space:nowrap; position:relative; transition:color .2s; }
+.tab::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:1.5px; background:var(--gold); transform:scaleX(0); transform-origin:left; transition:transform .25s cubic-bezier(.4,0,.2,1); }
+.tab.on { color:var(--gold); }
+.tab.on::after { transform:scaleX(1); }
+.tab:hover:not(.on) { color:var(--text-2); }
+
+/* HERO */
+.hero { padding:56px 32px 48px; border-bottom:1px solid var(--div); background:var(--bg); }
+.eyebrow { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--gold); margin-bottom:20px; }
+.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(36px,7vw,56px); font-weight:300; line-height:1.1; color:var(--text); margin-bottom:20px; }
+.hero-title em { font-style:italic; color:var(--gold-lt); }
+.hero-desc { font-size:13px; color:var(--text-2); line-height:1.85; max-width:560px; }
+
+/* SECTIONS */
+.sec { display:none; padding:0 32px 72px; background:var(--bg); }
+.sec.on { display:block; animation:fadeUp .28s ease both; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* SEC HEADER */
+.sec-hd { padding:44px 0 28px; border-bottom:1px solid var(--div); margin-bottom:32px; }
+.sec-eye { font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--text-4); margin-bottom:10px; }
+.sec-title { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--text); line-height:1.15; }
+.sec-title em { font-style:italic; color:var(--gold-lt); }
+
+/* LIST CARD */
+.lc { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); padding:26px 28px; margin-bottom:10px; }
+.lc .lbl { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-3); margin-bottom:16px; }
+.lc ul { list-style:none; }
+.lc li { display:flex; gap:14px; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--div); color:var(--text-2); font-size:13px; }
+.lc li:last-child { border:none; }
+.lc li::before { content:'—'; color:var(--gold); flex-shrink:0; font-size:11px; }
+.lc li strong { color:var(--text); font-weight:500; }
+
+/* PARTNERS */
+.partners { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+@media(max-width:520px){ .partners { grid-template-columns:1fr; } }
+.partner { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); padding:28px 26px; }
+.partner-name { font-family:'Cormorant Garamond',serif; font-size:28px; font-weight:300; color:var(--gold-pale); line-height:1; margin-bottom:6px; }
+.partner-share { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+.partner ul { list-style:none; }
+.partner li { font-size:12.5px; color:var(--text-2); padding:6px 0; border-bottom:1px solid var(--div); display:flex; gap:12px; }
+.partner li:last-child { border:none; }
+.partner li::before { content:'·'; color:var(--gold); flex-shrink:0; }
+
+/* STRUCT */
+.struct { background:var(--bg-card); border:1px solid var(--gold-line); border-radius:var(--r); padding:28px 28px; margin-bottom:10px; }
+.struct .lbl { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--text-3); margin-bottom:16px; }
+.struct-row { display:flex; justify-content:space-between; align-items:baseline; padding:9px 0; border-bottom:1px solid var(--div); font-size:13px; }
+.struct-row:last-child { border:none; }
+.struct-k { color:var(--text-3); }
+.struct-v { color:var(--text-2); }
+.struct-v.gold { color:var(--gold-pale); font-family:'Cormorant Garamond',serif; font-size:18px; }
+
+/* 2-COL */
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+@media(max-width:520px){ .two-col { grid-template-columns:1fr; } }
+.dec { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); padding:24px 26px; }
+.dec-title { font-size:10px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:16px; }
+.dec-title.muted { color:var(--text-3); }
+.dec-title.gold { color:var(--gold); }
+.dec ul { list-style:none; }
+.dec li { font-size:12.5px; color:var(--text-2); padding:6px 0; border-bottom:1px solid var(--div); display:flex; gap:12px; }
+.dec li:last-child { border:none; }
+.dec li::before { content:'·'; color:var(--gold); }
+
+/* CONTRACT CARD */
+.contract { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); overflow:hidden; margin-bottom:10px; }
+.contract-hd { padding:18px 24px; background:var(--bg-card2); border-bottom:1px solid var(--div); display:flex; align-items:center; gap:14px; }
+.contract-icon { width:28px; height:28px; background:var(--gold-glow); border:1px solid var(--gold-line); border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:12px; flex-shrink:0; }
+.contract-name { font-size:13px; color:var(--text); font-weight:400; }
+.contract-sub { font-size:11px; color:var(--text-3); margin-top:2px; }
+.contract-body { padding:20px 24px; }
+.c-row { display:flex; justify-content:space-between; align-items:baseline; padding:8px 0; border-bottom:1px solid var(--div); font-size:12.5px; }
+.c-row:last-child { border:none; }
+.c-k { color:var(--text-3); }
+.c-v { color:var(--text-2); }
+
+/* NUMBERED STEPS */
+.steps { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); padding:26px 28px; margin-bottom:10px; }
+.steps .lbl { margin-bottom:18px; }
+.step { display:flex; gap:16px; align-items:flex-start; padding:10px 0; border-bottom:1px solid var(--div); }
+.step:last-child { border:none; }
+.step-num { width:26px; height:26px; background:var(--gold-glow); border:1px solid var(--gold-line); border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:10px; color:var(--gold); font-weight:600; flex-shrink:0; margin-top:1px; }
+.step-text { font-size:12.5px; color:var(--text-2); line-height:1.6; }
+.step-text strong { color:var(--text); font-weight:500; display:block; margin-bottom:2px; }
+
+/* INSURANCE */
+.ins-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:10px; }
+@media(max-width:600px){ .ins-grid { grid-template-columns:1fr; } }
+.ins { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); padding:24px 20px; text-align:center; }
+.ins-icon { font-size:22px; margin-bottom:12px; opacity:.8; }
+.ins-name { font-size:11.5px; color:var(--text); font-weight:500; margin-bottom:6px; line-height:1.4; }
+.ins-desc { font-size:11px; color:var(--text-3); line-height:1.5; }
+
+/* DOCS */
+.docs-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px; }
+@media(max-width:520px){ .docs-grid { grid-template-columns:1fr; } }
+.doc { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); padding:20px 22px; display:flex; gap:14px; align-items:flex-start; }
+.doc-icon { font-size:18px; opacity:.75; flex-shrink:0; margin-top:2px; }
+.doc-name { font-size:12.5px; color:var(--text); font-weight:400; margin-bottom:4px; }
+.doc-desc { font-size:11.5px; color:var(--text-3); line-height:1.55; }
+
+/* TEMPLATE CARDS */
+.tmpl-card { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); overflow:hidden; margin-bottom:10px; transition:border-color .2s; }
+.tmpl-card:hover { border-color:var(--gold-line); }
+.tmpl-head { padding:20px 24px 16px; border-bottom:1px solid var(--div); display:flex; gap:14px; align-items:center; }
+.tmpl-badge { width:32px; height:32px; background:var(--gold-glow); border:1px solid var(--gold-line); border-radius:2px; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.tmpl-name { font-size:14px; color:var(--text); font-weight:400; }
+.tmpl-sub { font-size:11px; color:var(--text-3); margin-top:3px; }
+.tmpl-body { padding:18px 24px; }
+.tmpl-desc { font-size:12.5px; color:var(--text-2); line-height:1.7; margin-bottom:16px; }
+.tmpl-what { font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--text-3); margin-bottom:10px; }
+.tmpl-list { list-style:none; margin-bottom:20px; }
+.tmpl-list li { font-size:12px; color:var(--text-2); padding:5px 0; border-bottom:1px solid var(--div); display:flex; gap:10px; }
+.tmpl-list li:last-child { border:none; }
+.tmpl-list li::before { content:'·'; color:var(--gold); flex-shrink:0; }
+.tmpl-links { display:flex; gap:8px; flex-wrap:wrap; }
+.tmpl-btn { display:inline-flex; align-items:center; gap:7px; padding:9px 16px; border-radius:var(--r); font-family:'Montserrat',sans-serif; font-size:10.5px; font-weight:500; letter-spacing:.1em; text-decoration:none; transition:background .2s, border-color .2s; cursor:pointer; }
+.tmpl-btn.primary { background:var(--gold-glow); border:1px solid var(--gold-line); color:var(--gold); }
+.tmpl-btn.primary:hover { background:rgba(201,169,110,0.18); border-color:var(--gold); }
+.tmpl-btn.secondary { background:transparent; border:1px solid var(--div); color:var(--text-3); }
+.tmpl-btn.secondary:hover { border-color:var(--text-3); color:var(--text-2); }
+.tmpl-note { font-size:11px; color:var(--text-4); margin-top:14px; line-height:1.6; }
+.tmpl-note a { color:var(--text-3); text-decoration:underline; }
+
+/* TIMELINE */
+.timeline { margin-bottom:10px; }
+.tl-item { display:flex; gap:20px; align-items:stretch; margin-bottom:8px; }
+.tl-line { width:2px; background:linear-gradient(to bottom,var(--gold),rgba(201,169,110,.15)); flex-shrink:0; border-radius:2px; margin-top:8px; }
+.tl-body { background:var(--bg-card); border:1px solid var(--div); border-radius:var(--r); padding:20px 24px; flex:1; transition:border-color .2s; }
+.tl-body:hover { border-color:var(--gold-line); }
+.tl-tag { font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin-bottom:8px; }
+.tl-title { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:var(--text); line-height:1.2; margin-bottom:12px; }
+.tl-list { list-style:none; }
+.tl-list li { font-size:12px; color:var(--text-2); padding:5px 0; border-bottom:1px solid var(--div); display:flex; gap:12px; }
+.tl-list li:last-child { border:none; }
+.tl-list li::before { content:'—'; color:var(--gold); flex-shrink:0; font-size:11px; }
+
+/* RULE */
+.rule { background:var(--bg-card); border:1px solid var(--div); border-left:2px solid var(--gold); border-radius:var(--r); padding:24px 28px; margin-bottom:10px; }
+.rule p { font-family:'Cormorant Garamond',serif; font-size:22px; font-weight:300; color:var(--text); line-height:1.45; }
+.rule p em { font-style:italic; color:var(--gold-lt); }
+
+/* NOTE */
+.note { background:var(--bg-inset); border:1px solid var(--div); border-radius:var(--r); padding:16px 20px; margin-bottom:10px; }
+.note p { font-size:12px; color:var(--text-3); line-height:1.7; }
+.note p strong { color:var(--text-2); font-weight:500; }
+
+/* FINAL */
+.final { background:var(--bg-card); border:1px solid var(--gold-line); border-radius:var(--r); padding:48px 32px; text-align:center; margin-bottom:10px; }
+.final h2 { font-family:'Cormorant Garamond',serif; font-size:34px; font-weight:300; color:var(--text); margin-bottom:16px; line-height:1.2; }
+.final h2 em { font-style:italic; color:var(--gold-lt); }
+.final p { color:var(--text-2); font-size:12.5px; max-width:420px; margin:0 auto 8px; }
+.final-tag { display:inline-block; margin-top:20px; font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); border:1px solid var(--gold-line); padding:7px 18px; border-radius:var(--r); }
+
+/* UP */
+.up { position:fixed; bottom:24px; right:24px; width:36px; height:36px; background:var(--bg-card); border:1px solid var(--gold-line); border-radius:var(--r); color:var(--gold); font-size:14px; cursor:pointer; display:flex; align-items:center; justify-content:center; opacity:0; pointer-events:none; transition:opacity .25s; z-index:400; }
+.up.vis { opacity:1; pointer-events:auto; }
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <span class="hdr-logo">Agai Actions · Brand Intelligence HQ</span>
+  <span class="hdr-badge">07 · Legal &amp; Structure</span>
+</header>
+
+<nav class="nav-wrap">
+  <div class="nav">
+    <button class="tab on"  data-t="model">Модель</button>
+    <button class="tab"     data-t="structure">Структура</button>
+    <button class="tab"     data-t="roles">Роли</button>
+    <button class="tab"     data-t="decisions">Решения</button>
+    <button class="tab"     data-t="operating">Operating Agreement</button>
+    <button class="tab"     data-t="sub">Субконтрактор</button>
+    <button class="tab"     data-t="client">Договор с клиентом</button>
+    <button class="tab"     data-t="templates">Шаблоны договоров</button>
+    <button class="tab"     data-t="license">Лицензия</button>
+    <button class="tab"     data-t="insurance">Страховка</button>
+    <button class="tab"     data-t="taxes">Налоги</button>
+    <button class="tab"     data-t="plan">План действий</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow">Блок 07 · Юридическая структура и защита бизнеса</div>
+  <h1 class="hero-title">Legal — <em>Система защиты</em></h1>
+  <p class="hero-desc">Юридическая модель Agai Actions: структура LLC, партнёрское соглашение, договоры с подрядчиками и клиентами, лицензирование и страхование в Калифорнии.</p>
+</div>
+
+<!-- ══ МОДЕЛЬ ══ -->
+<section class="sec on" id="s-model">
+  <div class="sec-hd">
+    <div class="sec-eye">01 · Юридическая модель</div>
+    <h2 class="sec-title">Что делает <em>Agai Actions</em></h2>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Сфера деятельности · Interior Finishing</div>
+    <ul>
+      <li>Установка обоев — wallpaper installation</li>
+      <li>Подготовка стен — wall preparation</li>
+      <li>Продажа обоев — wallpaper supply</li>
+      <li>Консультации по дизайну</li>
+    </ul>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Юридическая модель должна обеспечивать</div>
+    <ul>
+      <li>Защиту владельцев от личной ответственности</li>
+      <li>Защиту денежных потоков</li>
+      <li>Защиту от претензий клиентов</li>
+      <li>Возможность масштабирования</li>
+    </ul>
+  </div>
+
+  <div class="rule"><p><em>Система важнее скорости.</em> Защита важнее удобства.</p></div>
+</section>
+
+<!-- ══ СТРУКТУРА ══ -->
+<section class="sec" id="s-structure">
+  <div class="sec-hd">
+    <div class="sec-eye">02 · Структура компании</div>
+    <h2 class="sec-title">LLC + <em>S-Corp Election</em></h2>
+  </div>
+
+  <div class="struct">
+    <div class="lbl">Юридическая форма</div>
+    <div class="struct-row"><span class="struct-k">Форма компании</span><span class="struct-v gold">LLC</span></div>
+    <div class="struct-row"><span class="struct-k">Налоговая модель</span><span class="struct-v gold">S-Corp Election</span></div>
+    <div class="struct-row"><span class="struct-k">Rakhman</span><span class="struct-v">50%</span></div>
+    <div class="struct-row"><span class="struct-k">Aram</span><span class="struct-v">50%</span></div>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Зачем S-Corp Election</div>
+    <ul>
+      <li>Снижение налоговой нагрузки на самозанятость</li>
+      <li>Оптимизация распределения прибыли</li>
+      <li>Разделение зарплаты и дивидендов — экономия на FICA</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ РОЛИ ══ -->
+<section class="sec" id="s-roles">
+  <div class="sec-hd">
+    <div class="sec-eye">03 · Распределение ролей</div>
+    <h2 class="sec-title">Каждый партнёр — <em>своя зона</em></h2>
+  </div>
+
+  <div class="partners">
+    <div class="partner">
+      <div class="partner-name">Rakhman</div>
+      <div class="partner-share">50% · Операции</div>
+      <ul>
+        <li>Финансы компании</li>
+        <li>Управление установочными командами</li>
+        <li>Контроль качества</li>
+        <li>Выполнение проектов</li>
+      </ul>
+    </div>
+    <div class="partner">
+      <div class="partner-name">Aram</div>
+      <div class="partner-share">50% · Продажи</div>
+      <ul>
+        <li>Продажи</li>
+        <li>Маркетинг</li>
+        <li>Коммуникация с клиентами</li>
+        <li>Развитие бизнеса</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <p>Каждый партнёр имеет <strong>полный доступ к информации</strong> в рамках компании. Операционные решения принимаются в рамках зон ответственности.</p>
+  </div>
+</section>
+
+<!-- ══ РЕШЕНИЯ ══ -->
+<section class="sec" id="s-decisions">
+  <div class="sec-hd">
+    <div class="sec-eye">04 · Контроль и решения</div>
+    <h2 class="sec-title">Что требует <em>совместного согласия</em></h2>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Только совместно — обязательное согласие обоих</div>
+    <ul>
+      <li>Изменение цен</li>
+      <li>Крупные расходы</li>
+      <li>Найм ключевых сотрудников</li>
+      <li>Привлечение подрядчиков</li>
+      <li>Изменение структуры компании</li>
+      <li>Кредиты и обязательства</li>
+    </ul>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Финансовая прозрачность — обязательна</div>
+    <ul>
+      <li>Доступ к банковскому счёту у обоих партнёров</li>
+      <li>Доступ к бухгалтерии у обоих партнёров</li>
+      <li>Еженедельный финансовый отчёт</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ OPERATING AGREEMENT ══ -->
+<section class="sec" id="s-operating">
+  <div class="sec-hd">
+    <div class="sec-eye">05 · Партнёрское соглашение</div>
+    <h2 class="sec-title">Operating <em>Agreement</em></h2>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Обязательные положения</div>
+    <ul>
+      <li>Доли 50/50</li>
+      <li>Равные права голоса</li>
+      <li>Распределение прибыли 50/50</li>
+      <li>Обязательное согласие на ключевые решения</li>
+      <li>Право выкупа доли при выходе партнёра</li>
+      <li>Порядок разрешения конфликтов</li>
+      <li>Запрет конкуренции (non-compete)</li>
+      <li>Запрет переманивания клиентов (non-solicitation)</li>
+    </ul>
+  </div>
+
+  <div class="rule"><p>Оформить <em>до начала работы</em> — не после</p></div>
+</section>
+
+<!-- ══ СУБКОНТРАКТОР ══ -->
+<section class="sec" id="s-sub">
+  <div class="sec-hd">
+    <div class="sec-eye">06 · Договор с подрядчиком</div>
+    <h2 class="sec-title">Subcontractor <em>Agreement</em></h2>
+  </div>
+
+  <div class="contract">
+    <div class="contract-hd">
+      <div class="contract-icon">📋</div>
+      <div><div class="contract-name">Статус подрядчика</div><div class="contract-sub">Независимый контрактор — не сотрудник компании</div></div>
+    </div>
+    <div class="contract-body">
+      <div class="c-row"><span class="c-k">Налоги</span><span class="c-v">Платит самостоятельно (1099)</span></div>
+      <div class="c-row"><span class="c-k">Представление компании</span><span class="c-v">Только с письменного разрешения</span></div>
+      <div class="c-row"><span class="c-k">Оплата</span><span class="c-v">Фиксированная за проект · после выполнения</span></div>
+      <div class="c-row"><span class="c-k">Ответственность</span><span class="c-v">За ошибки, повреждения, нарушение стандартов</span></div>
+    </div>
+  </div>
+
+  <div class="two-col">
+    <div class="dec">
+      <div class="dec-title muted">Обязанности подрядчика</div>
+      <ul>
+        <li>Выполнять работу по стандартам компании</li>
+        <li>Соблюдать сроки</li>
+        <li>Соблюдать чистоту на объекте</li>
+        <li>Соблюдать стандарт поведения с клиентом</li>
+      </ul>
+    </div>
+    <div class="dec">
+      <div class="dec-title gold">Запрещается</div>
+      <ul>
+        <li>Уводить клиентов компании</li>
+        <li>Работать напрямую с клиентами компании</li>
+        <li>Нарушение — расторжение договора</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══ ДОГОВОР С КЛИЕНТОМ ══ -->
+<section class="sec" id="s-client">
+  <div class="sec-hd">
+    <div class="sec-eye">07 · Договор с клиентом</div>
+    <h2 class="sec-title">Client Service <em>Agreement</em></h2>
+  </div>
+
+  <div class="contract">
+    <div class="contract-hd">
+      <div class="contract-icon">📄</div>
+      <div><div class="contract-name">Scope of Work</div><div class="contract-sub">Что выполняет компания по каждому проекту</div></div>
+    </div>
+    <div class="contract-body">
+      <div class="c-row"><span class="c-k">Работы</span><span class="c-v">Подготовка стен + установка обоев</span></div>
+      <div class="c-row"><span class="c-k">Дополнительные работы</span><span class="c-v">По согласованию — отдельный Change Order</span></div>
+    </div>
+  </div>
+
+  <div class="contract">
+    <div class="contract-hd">
+      <div class="contract-icon">💰</div>
+      <div><div class="contract-name">Pricing &amp; Payment</div><div class="contract-sub">Цена и условия оплаты</div></div>
+    </div>
+    <div class="contract-body">
+      <div class="c-row"><span class="c-k">Цена</span><span class="c-v">Фиксируется в estimate до начала работ</span></div>
+      <div class="c-row"><span class="c-k">Изменение цены</span><span class="c-v">Только при изменении объёма, материалов или доп. работ</span></div>
+      <div class="c-row"><span class="c-k">Депозит</span><span class="c-v">20% при бронировании — не возвращается при отмене</span></div>
+      <div class="c-row"><span class="c-k">Промежуточные платежи</span><span class="c-v">По договорённости</span></div>
+      <div class="c-row"><span class="c-k">Финальный платёж</span><span class="c-v">После завершения всех работ</span></div>
+    </div>
+  </div>
+
+  <div class="contract">
+    <div class="contract-hd">
+      <div class="contract-icon">⚖️</div>
+      <div><div class="contract-name">Ответственность &amp; Гарантия</div><div class="contract-sub">Ограничение ответственности и условия гарантии</div></div>
+    </div>
+    <div class="contract-body">
+      <div class="c-row"><span class="c-k">Ответственность компании</span><span class="c-v">Ограничена стоимостью выполненных работ</span></div>
+      <div class="c-row"><span class="c-k">Не несём ответственность за</span><span class="c-v">Скрытые дефекты стен, неровности, старые повреждения</span></div>
+      <div class="c-row"><span class="c-k">Задержки по вине клиента</span><span class="c-v">Не наша ответственность</span></div>
+      <div class="c-row"><span class="c-k">Задержки по поставке</span><span class="c-v">Не наша ответственность</span></div>
+      <div class="c-row"><span class="c-k">Гарантия на работу</span><span class="c-v">Ограниченная гарантия — условия в договоре</span></div>
+      <div class="c-row"><span class="c-k">Фото проекта</span><span class="c-v">Компания вправе использовать в маркетинге</span></div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><strong>Change Orders:</strong> любые изменения объёма оформляются отдельным документом и оплачиваются дополнительно. Устные договорённости не считаются.</p>
+  </div>
+</section>
+
+<!-- ══ ШАБЛОНЫ ДОГОВОРОВ ══ -->
+<section class="sec" id="s-templates">
+  <div class="sec-hd">
+    <div class="sec-eye">08 · Шаблоны договоров</div>
+    <h2 class="sec-title">Готовые документы для <em>скачивания</em></h2>
+  </div>
+
+  <div class="note" style="margin-bottom:20px;">
+    <p><strong>Важно:</strong> шаблоны ниже — стандартные юридические формы для Калифорнии. Перед использованием рекомендуется адаптировать под Agai Actions и проверить с юристом. Все ссылки ведут на проверенные источники.</p>
+  </div>
+
+  <!-- 1. Employment Contract -->
+  <div class="tmpl-card">
+    <div class="tmpl-head">
+      <div class="tmpl-badge">👤</div>
+      <div>
+        <div class="tmpl-name">Договор с сотрудником в найм</div>
+        <div class="tmpl-sub">California Employment Contract · W-2 Employee</div>
+      </div>
+    </div>
+    <div class="tmpl-body">
+      <p class="tmpl-desc">Для оформления менеджера, дизайнера или любого штатного сотрудника. Регулируется California Labor Code. Калифорния — at-will state, но договор защищает обе стороны.</p>
+      <div class="tmpl-what">Что включает шаблон</div>
+      <ul class="tmpl-list">
+        <li>Должность, обязанности, место работы</li>
+        <li>Зарплата (оклад или почасовая) + overtime</li>
+        <li>At-will employment или фиксированный срок</li>
+        <li>Конфиденциальность и NDA</li>
+        <li>Условия расторжения</li>
+        <li>Governing law: California</li>
+      </ul>
+      <div class="tmpl-links">
+        <a href="https://eforms.com/images/2019/01/California-Employment-Contract-Template.pdf" target="_blank" class="tmpl-btn primary">⬇ Скачать PDF · eForms</a>
+        <a href="https://legaltemplates.net/form/employment-contract/california-ca/" target="_blank" class="tmpl-btn secondary">Открыть онлайн · LegalTemplates</a>
+        <a href="https://esign.com/employment/ca/" target="_blank" class="tmpl-btn secondary">Word версия · eSign</a>
+      </div>
+      <p class="tmpl-note">Минимальная зарплата в Калифорнии на 2025 год — <strong>$16.50/час</strong>. Overtime: 1.5× после 8 часов в день или 40 в неделю.</p>
+    </div>
+  </div>
+
+  <!-- 2. Subcontractor Agreement -->
+  <div class="tmpl-card">
+    <div class="tmpl-head">
+      <div class="tmpl-badge">🔧</div>
+      <div>
+        <div class="tmpl-name">Договор с субконтрактором</div>
+        <div class="tmpl-sub">California Subcontractor Agreement · 1099 Independent Contractor</div>
+      </div>
+    </div>
+    <div class="tmpl-body">
+      <p class="tmpl-desc">Для бригад — установщик, подготовщик, хелпер. Фиксирует статус независимого контрактора (не сотрудника), условия оплаты, стандарты работы и запрет переманивания клиентов.</p>
+      <div class="tmpl-what">Что включает шаблон</div>
+      <ul class="tmpl-list">
+        <li>Статус: independent contractor, не employee</li>
+        <li>Описание услуг и стандарты выполнения</li>
+        <li>Оплата: фиксированная за проект или объём</li>
+        <li>Сроки выполнения и cleanup обязательства</li>
+        <li>Non-solicitation клиентов компании</li>
+        <li>Ответственность за ошибки и повреждения</li>
+        <li>Условия расторжения</li>
+      </ul>
+      <div class="tmpl-links">
+        <a href="https://eforms.com/images/2019/04/California-Subcontractor-Agreement-Template.pdf" target="_blank" class="tmpl-btn primary">⬇ Скачать PDF · eForms</a>
+        <a href="https://legaltemplates.net/form/employment-contract/subcontractor/california-ca/" target="_blank" class="tmpl-btn secondary">Открыть онлайн · LegalTemplates</a>
+        <a href="https://esign.com/employment/subcontractor/ca/" target="_blank" class="tmpl-btn secondary">Word версия · eSign</a>
+      </div>
+      <p class="tmpl-note">По California Business and Professions Code § 7108.5(a) — оплата субконтрактору в течение <strong>7 дней</strong> после получения оплаты от клиента.</p>
+    </div>
+  </div>
+
+  <!-- 3. Client Service Agreement -->
+  <div class="tmpl-card">
+    <div class="tmpl-head">
+      <div class="tmpl-badge">🏠</div>
+      <div>
+        <div class="tmpl-name">Договор с клиентом</div>
+        <div class="tmpl-sub">California Home Improvement Contract · CSLB Compliant</div>
+      </div>
+    </div>
+    <div class="tmpl-body">
+      <p class="tmpl-desc">Официальный шаблон от CSLB (Contractors State License Board) — государственный орган Калифорнии. Обязателен для проектов стоимостью <strong>более $500</strong>. Включает все требования California Business and Professions Code § 7159.</p>
+      <div class="tmpl-what">Что включает шаблон</div>
+      <ul class="tmpl-list">
+        <li>Описание проекта и материалов (Scope of Work)</li>
+        <li>Цена и детальный график платежей</li>
+        <li>Депозит · промежуточные платежи · финал</li>
+        <li>Right to Cancel — право отмены в течение 3–5 дней</li>
+        <li>Change Orders процедура</li>
+        <li>Mechanics Lien уведомление</li>
+        <li>Warranty и ограничение ответственности</li>
+        <li>Информация о страховке подрядчика</li>
+      </ul>
+      <div class="tmpl-links">
+        <a href="https://www.cslb.ca.gov/Resources/GuidesAndPublications/2025/SAMPLE%20HOME%20IMPROVEMENT%20CONTRACT.pdf" target="_blank" class="tmpl-btn primary">⬇ Скачать PDF · CSLB.ca.gov</a>
+        <a href="https://www.levelset.com/contract/california-home-improvement-contract-form/" target="_blank" class="tmpl-btn secondary">Заполнить онлайн · Levelset</a>
+        <a href="https://www.rocketlawyer.com/business-and-contracts/service-contracts/construction-contracts/document/home-improvement-contract" target="_blank" class="tmpl-btn secondary">Rocket Lawyer</a>
+      </div>
+      <p class="tmpl-note"><strong>Важно по California закону:</strong> депозит не может превышать $1,000 или 10% от стоимости проекта (что меньше). Подробнее: <a href="https://www.cslb.ca.gov/Resources/GuidesAndPublications/ContractingForSuccess.pdf" target="_blank">CSLB Contracting Guide PDF</a></p>
+    </div>
+  </div>
+
+</section>
+
+<!-- ══ ЛИЦЕНЗИЯ ══ -->
+<section class="sec" id="s-license">
+  <div class="sec-hd">
+    <div class="sec-eye">09 · Лицензирование</div>
+    <h2 class="sec-title">Contractor License <em>California · CSLB</em></h2>
+  </div>
+
+  <div class="struct" style="margin-bottom:10px;">
+    <div class="lbl">Параметры</div>
+    <div class="struct-row"><span class="struct-k">Орган</span><span class="struct-v gold">CSLB</span></div>
+    <div class="struct-row"><span class="struct-k">Срок получения</span><span class="struct-v">2–4 месяца</span></div>
+    <div class="struct-row"><span class="struct-k">Минимальный опыт</span><span class="struct-v">4 года в сфере</span></div>
+    <div class="struct-row"><span class="struct-k">Сайт</span><span class="struct-v">cslb.ca.gov</span></div>
+  </div>
+
+  <div class="steps">
+    <div class="lbl">Процесс получения · 5 шагов</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text"><strong>Подтверждение опыта</strong>Документально подтвердить минимум 4 года работы в сфере установки или отделки</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text"><strong>Подача заявки в CSLB</strong>Заполнить и отправить Application for Original Contractor License на cslb.ca.gov</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text"><strong>Экзамен Law &amp; Business</strong>Тест на знание законодательства, деловой практики и требований к контрактам в Калифорнии</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text"><strong>Экзамен Trade</strong>Профессиональный экзамен по специальности (wallpaper / interior finish)</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-text"><strong>Background check + получение лицензии</strong>Проверка биографии и выдача лицензионного номера CSLB</div>
+    </div>
+  </div>
+
+  <div class="note">
+    <p><strong>До получения лицензии:</strong> избегать контрактов на сумму свыше $500, учитывать юридические риски. Работа без лицензии на проекты более $500 — нарушение California law.</p>
+  </div>
+</section>
+
+<!-- ══ СТРАХОВКА ══ -->
+<section class="sec" id="s-insurance">
+  <div class="sec-hd">
+    <div class="sec-eye">10 · Страхование</div>
+    <h2 class="sec-title">Обязательные <em>виды</em></h2>
+  </div>
+
+  <div class="ins-grid">
+    <div class="ins">
+      <div class="ins-icon">🛡️</div>
+      <div class="ins-name">General Liability Insurance</div>
+      <div class="ins-desc">Защита от претензий клиентов и повреждений имущества на объекте</div>
+    </div>
+    <div class="ins">
+      <div class="ins-icon">👷</div>
+      <div class="ins-name">Workers Compensation</div>
+      <div class="ins-desc">Обязателен при наличии сотрудников в штате</div>
+    </div>
+    <div class="ins">
+      <div class="ins-icon">🚗</div>
+      <div class="ins-name">Commercial Auto Insurance</div>
+      <div class="ins-desc">На все автомобили используемые в бизнесе — уже включена в лизинг ($400/мес)</div>
+    </div>
+  </div>
+
+  <div class="rule"><p>Отсутствие страховки создаёт <em>прямой риск финансовых потерь</em></p></div>
+</section>
+
+<!-- ══ НАЛОГИ ══ -->
+<section class="sec" id="s-taxes">
+  <div class="sec-hd">
+    <div class="sec-eye">11 · Налоги и документы</div>
+    <h2 class="sec-title">Обязательная <em>документация</em></h2>
+  </div>
+
+  <div class="docs-grid">
+    <div class="doc">
+      <div class="doc-icon">📋</div>
+      <div><div class="doc-name">Seller's Permit</div><div class="doc-desc">Разрешение на продажу товаров в Калифорнии — нужен для продажи обоев</div></div>
+    </div>
+    <div class="doc">
+      <div class="doc-icon">🏢</div>
+      <div><div class="doc-name">Business License</div><div class="doc-desc">Лицензия на ведение бизнеса в муниципалитете (город / county)</div></div>
+    </div>
+    <div class="doc">
+      <div class="doc-icon">💻</div>
+      <div><div class="doc-name">QuickBooks</div><div class="doc-desc">Система бухгалтерского учёта, отчётности и invoice</div></div>
+    </div>
+    <div class="doc">
+      <div class="doc-icon">🏦</div>
+      <div><div class="doc-name">Business Bank Account</div><div class="doc-desc">Отдельный счёт компании — никогда не мешать с личными</div></div>
+    </div>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Обязательства компании</div>
+    <ul>
+      <li>Собирать и перечислять sales tax с продаж обоев</li>
+      <li>Сдавать tax отчётность в установленные сроки</li>
+      <li>Выдавать 1099 субконтракторам ежегодно</li>
+      <li>Вести invoice систему для каждого проекта</li>
+    </ul>
+  </div>
+
+  <div class="lc">
+    <div class="lbl">Дополнительные документы компании</div>
+    <ul>
+      <li><strong>NDA</strong> — при работе с партнёрами и поставщиками</li>
+      <li><strong>Subcontractor Agreements</strong> — для каждой бригады</li>
+      <li><strong>Client Service Agreements</strong> — для каждого проекта</li>
+      <li><strong>Invoice система</strong> — QuickBooks или аналог</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══ ПЛАН ДЕЙСТВИЙ ══ -->
+<section class="sec" id="s-plan">
+  <div class="sec-hd">
+    <div class="sec-eye">12 · План действий</div>
+    <h2 class="sec-title">Что сделать <em>и когда</em></h2>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-line"></div>
+      <div class="tl-body">
+        <div class="tl-tag">Срочно · сейчас</div>
+        <div class="tl-title">Юридическая база</div>
+        <ul class="tl-list">
+          <li>Оформить Operating Agreement (партнёрство 50/50)</li>
+          <li>Подписать Subcontractor Agreement с бригадой</li>
+          <li>Подготовить Client Service Agreement для клиентов</li>
+          <li>Проверить наличие Business License и Seller's Permit</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-line"></div>
+      <div class="tl-body">
+        <div class="tl-tag">В течение 30 дней</div>
+        <div class="tl-title">Финансы и защита</div>
+        <ul class="tl-list">
+          <li>Оформить General Liability Insurance</li>
+          <li>Открыть Business Bank Account (отдельный от личного)</li>
+          <li>Настроить QuickBooks — учёт с первого проекта</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-line"></div>
+      <div class="tl-body">
+        <div class="tl-tag">В течение 90 дней</div>
+        <div class="tl-title">Лицензия и система</div>
+        <ul class="tl-list">
+          <li>Подать заявку на Contractor License в CSLB</li>
+          <li>Сдать экзамены Law &amp; Business + Trade</li>
+          <li>Выстроить полную юридическую систему документов</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="final">
+    <h2>Agai Actions — <em>защищённая система</em></h2>
+    <p>Юридическая структура — это не бюрократия, а фундамент для роста.</p>
+    <p>Система важнее скорости · защита важнее удобства.</p>
+    <div class="final-tag">LLC · S-Corp · CSLB · California</div>
+  </div>
+</section>
+
+<button class="up" id="up">↑</button>
+
+<script>
+  document.querySelectorAll('.tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('on'));
+      document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+      btn.classList.add('on');
+      document.getElementById('s-' + btn.dataset.t).classList.add('on');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+  const upBtn = document.getElementById('up');
+  window.addEventListener('scroll', () => upBtn.classList.toggle('vis', scrollY > 260));
+  upBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+</script>
+</body>
+</html>
